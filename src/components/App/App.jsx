@@ -1,13 +1,16 @@
 import React from 'react';
-import './App.css';
+import TaskList from '../TaskList';
+import classes from './App.module.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="header">
-        <h1 className="title">todos</h1>
+    <div className={classes.App}>
+      <header className={classes.header}>
+        <h1 className={classes.title}>todos</h1>
       </header>
-      <section className="main"></section>
+      <section className={classes.name}></section>
+
+      <TaskList />
     </div>
   );
 }
