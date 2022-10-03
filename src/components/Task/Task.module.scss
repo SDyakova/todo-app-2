@@ -10,7 +10,27 @@
   padding: 8px;
 }
 
-.task {
+.checkbox_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+input[type='checkbox'] {
+  // display: inline-block;
+  width: 19px; /*Размер вашей кнопки или чекбокса*/
+  height: 19px;
+  // margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.title {
   font-size: 24px;
-  margin-left: 8px;
+  margin-left: 12px;
+}
+
+.btn {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
 }
