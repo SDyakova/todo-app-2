@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Button/Button';
 import classes from './Task.module.scss';
 
 const Task = () => {
@@ -10,8 +11,8 @@ const Task = () => {
       </div>
       <div>
         <span className={classes.timer}>created 17 seconds ago</span>
-        <button className={`${classes.btn} ${classes.edit}`}>Edit</button>
-        <button>Delete</button>
+        <Button type="edit" />
+        <Button type="delete" />
       </div>
     </label>
   );
