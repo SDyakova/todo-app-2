@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../Button/Button';
-import { formatDistanceToNow, format } from 'date-fns';
 import classes from './Task.module.scss';
 
 const Task = ({ title }) => {
