@@ -3,8 +3,7 @@ import Button from '../Button/Button';
 import { formatDistanceToNow, format } from 'date-fns';
 import classes from './Task.module.scss';
 
-const Task = ({ title, date }) => {
-  let formatedDate = formatDistanceToNow(date, { includeSeconds: true });
+const Task = ({ title }) => {
   return (
     <label className={classes.input}>
       <div className={classes.checkbox_wrapper}>
@@ -12,7 +11,6 @@ const Task = ({ title, date }) => {
         <span className={classes.title}>{title}</span>
       </div>
       <div>
-        <span className={classes.timer}>`created {formatedDate} ago`</span>
         <Button type="edit" />
         <Button type="delete" />
       </div>
