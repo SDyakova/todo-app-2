@@ -5,16 +5,13 @@
 }
 
 .header {
-  position: relative;
-  /* height: 60px; */
+  display: block;
+  padding: 20px 0;
 }
 
 .title {
   font-size: 80px;
   font-weight: normal;
   color: rgb(234, 201, 201);
-
-  position: absolute;
-  left: 50%;
-  margin: 20px 0;
+  text-align: center;
 }

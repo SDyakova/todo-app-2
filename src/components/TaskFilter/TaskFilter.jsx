@@ -1,5 +1,5 @@
 import React from 'react';
-import './TaskFilter.css';
+import classes from './TaskFilter.module.scss';
 
 const TaskFilter = () => {
   return <p>TaskFilter</p>;

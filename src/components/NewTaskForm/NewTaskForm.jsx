@@ -1,5 +1,5 @@
 import React from 'react';
-import './NewTaskForm.css';
+import classes from './NewTaskForm.module.scss';
 
 const NewTaskForm = () => {
   return <p>NewTaskForm</p>;
