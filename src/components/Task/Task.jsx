@@ -1,9 +1,8 @@
 import React from 'react';
 import Button from '../Button/Button';
-import { formatDistanceToNow, format } from 'date-fns';
 import classes from './Task.module.scss';
 
-const Task = ({ title }) => {
+const Task = ({ id, title, onDeleted }) => {
   return (
     <label className={classes.input}>
       <div className={classes.checkbox_wrapper}>
@@ -12,7 +11,7 @@ const Task = ({ title }) => {
       </div>
       <div>
         <Button type="edit" />
-        <Button type="delete" />
+        <Button type="delete" onDeleted={() => onDeleted(id)} />
       </div>
     </label>
   );

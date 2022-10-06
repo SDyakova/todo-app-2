@@ -27,6 +27,13 @@ function App() {
     }
   };
 
+  const deleteTask = (id) => {
+    setAppState((appState) => {
+      const newArr = appState.filter((task) => task.id !== id);
+      return [...newArr];
+    });
+  };
+
   return (
     <div className={classes.App}>
       <header className={classes.header}>
@@ -34,7 +41,7 @@ function App() {
       </header>
       <section className={classes.main}>
         <NewTaskForm addTask={addTask} />
-        <TaskList taskItems={appState} />
+        <TaskList taskItems={appState} onDeleted={deleteTask} />
       </section>
     </div>
   );
