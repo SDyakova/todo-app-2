@@ -34,6 +34,14 @@ function App() {
     });
   };
 
+  const editTask = (title, id) => {
+    setAppState((appState) => {
+      const newArr = appState.map((task) => (task.id === id ? { ...task, title } : task));
+      console.log(newArr);
+      return [...newArr];
+    });
+  };
+
   return (
     <div className={classes.App}>
       <header className={classes.header}>
@@ -41,7 +49,7 @@ function App() {
       </header>
       <section className={classes.main}>
         <NewTaskForm addTask={addTask} />
-        <TaskList taskItems={appState} onDeleted={deleteTask} />
+        <TaskList taskItems={appState} onDeleted={deleteTask} onEditingTask={editTask} />
       </section>
     </div>
   );
