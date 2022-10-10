@@ -1,15 +1,13 @@
 import React from 'react';
 import classes from './Button.module.scss';
 
-const Button = ({ type, onDeleted, handleEditButtonClick }) => {
-  const btns = { edit: 'Edit', delete: 'X' };
-
+const Button = ({ type, title, onDeleted, handleEditButtonClick }) => {
   return (
     <button
-      className={`${classes.btn} ${classes[type]}`}
-      onClick={type === 'delete' ? onDeleted : handleEditButtonClick}
+      className={`${classes.btn} ${classes[type] ? classes[type] : ''}`}
+      onClick={type === 'delete' ? onDeleted : type === 'edit' ? handleEditButtonClick : null}
     >
-      {btns[type]}
+      {title}
     </button>
   );
 };
