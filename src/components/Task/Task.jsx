@@ -24,7 +24,6 @@ const Task = ({ id, title, onDeleted, onEditingTask }) => {
 
   const handleKeyUp = (e) => {
     if (isEditing && e.key === 'Enter') {
-      console.log(e.target.value);
       onEditingTask(e.target.value, id);
       setTaskState((taskState) => ({
         ...taskState,
@@ -58,8 +57,13 @@ const Task = ({ id, title, onDeleted, onEditingTask }) => {
           <span className={classes.title}>{title}</span>
         </div>
         <div>
-          <Button type="edit" handleEditButtonClick={handleEditButtonClick} />
-          <Button type="delete" onDeleted={() => onDeleted(id)} onEditingTask={() => onEditingTask(id, title)} />
+          <Button type="edit" title="Edit" handleEditButtonClick={handleEditButtonClick} />
+          <Button
+            type="delete"
+            title="Delete"
+            onDeleted={() => onDeleted(id)}
+            onEditingTask={() => onEditingTask(id, title)}
+          />
         </div>
       </label>
     </li>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TaskList from '../TaskList';
 import NewTaskForm from '../NewTaskForm';
+import Footer from '../Footer';
 import classes from './App.module.scss';
 
 let maxId = 100;
@@ -37,7 +38,6 @@ function App() {
   const editTask = (title, id) => {
     setAppState((appState) => {
       const newArr = appState.map((task) => (task.id === id ? { ...task, title } : task));
-      console.log(newArr);
       return [...newArr];
     });
   };
@@ -47,10 +47,11 @@ function App() {
       <header className={classes.header}>
         <h1 className={classes.title}>todos</h1>
       </header>
-      <section className={classes.main}>
+      <div className={classes.main}>
         <NewTaskForm addTask={addTask} />
         <TaskList taskItems={appState} onDeleted={deleteTask} onEditingTask={editTask} />
-      </section>
+        <Footer />
+      </div>
     </div>
   );
 }
