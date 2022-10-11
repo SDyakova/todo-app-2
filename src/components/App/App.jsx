@@ -11,18 +11,24 @@ function App() {
     return {
       id: maxId++,
       title: text,
-      date: Date.now(),
+      isCompleted: false,
     };
   };
 
-  const initialState = [createTask('New Task1'), createTask('New Task2'), createTask('New Task3')];
+  const initialState = {
+    taskItems: [createTask('New Task1'), createTask('New Task2'), createTask('New Task3')],
+    filteredItems: [],
+    currentFilter: 'All',
+  };
   const [appState, setAppState] = useState(initialState);
+  const { taskItems, filteredItems, currentFilter } = appState;
 
   const addTask = (e) => {
     const newTask = createTask(e.target.value);
     if (e.key === 'Enter') {
       setAppState((appState) => {
-        return [...appState, newTask];
+        const newArr = [...taskItems, newTask];
+        return { ...appState, taskItems: newArr };
       });
       e.target.value = '';
     }
@@ -30,15 +36,53 @@ function App() {
 
   const deleteTask = (id) => {
     setAppState((appState) => {
-      const newArr = appState.filter((task) => task.id !== id);
-      return [...newArr];
+      const newArr = taskItems.filter((task) => task.id !== id);
+      return { ...appState, taskItems: newArr };
     });
   };
 
   const editTask = (title, id) => {
     setAppState((appState) => {
-      const newArr = appState.map((task) => (task.id === id ? { ...task, title } : task));
-      return [...newArr];
+      const newArr = taskItems.map((task) => (task.id === id ? { ...task, title } : task));
+      return { ...appState, taskItems: newArr };
+    });
+  };
+
+  const onToggleCompleted = (id) => {
+    setAppState((appState) => {
+      const newArr = taskItems.map((task) => (task.id === id ? { ...task, isCompleted: !task.isCompleted } : task));
+      return { ...appState, taskItems: newArr };
+    });
+  };
+
+  const getFilteredItems = (title) => {
+    setAppState((appState) => {
+      let filteredItems = [];
+      if (title === 'Completed') {
+        filteredItems = taskItems.filter(({ isCompleted }) => isCompleted);
+      } else if (title === 'Active') {
+        filteredItems = taskItems.filter(({ isCompleted }) => !isCompleted);
+      } else {
+        filteredItems = taskItems;
+      }
+
+      return {
+        ...appState,
+        filteredItems,
+        currentFilter: title,
+      };
+    });
+  };
+
+  const onClearAllCompleted = () => {
+    const getNewState = (state) => state.filter((task) => !task.isCompleted);
+
+    setAppState((appState) => {
+      return {
+        ...appState,
+        taskItems: getNewState(taskItems),
+        filteredItems: getNewState(filteredItems),
+      };
     });
   };
 
@@ -49,8 +93,18 @@ function App() {
       </header>
       <div className={classes.main}>
         <NewTaskForm addTask={addTask} />
-        <TaskList taskItems={appState} onDeleted={deleteTask} onEditingTask={editTask} />
-        <Footer />
+        <TaskList
+          taskItems={currentFilter === 'All' ? taskItems : filteredItems}
+          onDeleted={deleteTask}
+          onEditingTask={editTask}
+          onCompleted={onToggleCompleted}
+        />
+        <Footer
+          onFilter={getFilteredItems}
+          currentFilter={currentFilter}
+          onClearAllCompleted={onClearAllCompleted}
+          taskItems={taskItems}
+        />
       </div>
     </div>
   );
