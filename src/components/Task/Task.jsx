@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '../Button/Button';
 import classes from './Task.module.scss';
 
-const Task = ({ id, title, onDeleted, onEditingTask }) => {
+const Task = ({ id, title, onDeleted, onEditingTask, onCompleted, isCompleted }) => {
   const initialState = {
     isEditing: false,
     inputValue: title,
@@ -53,8 +53,8 @@ const Task = ({ id, title, onDeleted, onEditingTask }) => {
     <li>
       <label className={classes.input}>
         <div className={classes.checkbox_wrapper}>
-          <input className={classes.checkbox} type="checkbox"></input>
-          <span className={classes.title}>{title}</span>
+          <input className={classes.checkbox} type="checkbox" onClick={onCompleted}></input>
+          <span className={`${classes.title} ${isCompleted ? classes.completed : ''}`}>{title}</span>
         </div>
         <div>
           <Button type="edit" title="Edit" handleEditButtonClick={handleEditButtonClick} />
