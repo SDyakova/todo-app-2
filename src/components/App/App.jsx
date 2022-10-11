@@ -66,12 +66,22 @@ function App() {
         filteredItems = taskItems;
       }
 
-      console.log(filteredItems);
-
       return {
         ...appState,
         filteredItems,
         currentFilter: title,
+      };
+    });
+  };
+
+  const onClearAllCompleted = () => {
+    const getNewState = (state) => state.filter((task) => !task.isCompleted);
+
+    setAppState((appState) => {
+      return {
+        ...appState,
+        taskItems: getNewState(taskItems),
+        filteredItems: getNewState(filteredItems),
       };
     });
   };
@@ -89,7 +99,12 @@ function App() {
           onEditingTask={editTask}
           onCompleted={onToggleCompleted}
         />
-        <Footer onFilter={getFilteredItems} />
+        <Footer
+          onFilter={getFilteredItems}
+          currentFilter={currentFilter}
+          onClearAllCompleted={onClearAllCompleted}
+          taskItems={taskItems}
+        />
       </div>
     </div>
   );

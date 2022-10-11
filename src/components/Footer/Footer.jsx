@@ -3,12 +3,13 @@ import Button from '../Button';
 import TaskFilter from '../TaskFilter';
 import classes from './Footer.module.scss';
 
-const Footer = ({ onFilter }) => {
+const Footer = ({ onFilter, currentFilter, onClearAllCompleted, taskItems }) => {
+  let leftItems = taskItems.filter((task) => !task.isCompleted).length;
   return (
     <footer className={classes.footer}>
-      <span>1 items left</span>
-      <TaskFilter onFilter={onFilter} />
-      <Button title="Clear completed" />
+      <span>{leftItems} items left</span>
+      <TaskFilter onFilter={onFilter} currentFilter={currentFilter} />
+      <Button title="Clear completed" onClearAllCompleted={onClearAllCompleted} />
     </footer>
   );
 };

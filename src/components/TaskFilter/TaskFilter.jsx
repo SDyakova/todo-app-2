@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../Button';
 import classes from './TaskFilter.module.scss';
 
-const TaskFilter = ({ onFilter }) => {
+const TaskFilter = ({ onFilter, currentFilter }) => {
   const filterBtns = [
     { title: 'All', id: 'b1' },
     { title: 'Active', id: 'b2' },
@@ -10,7 +10,7 @@ const TaskFilter = ({ onFilter }) => {
   ];
 
   const filterList = filterBtns.map(({ title, id }) => (
-    <Button title={title} key={id} onFilter={() => onFilter(title)} />
+    <Button title={title} key={id} onFilter={() => onFilter(title)} isSelected={currentFilter === title} />
   ));
 
   return <div>{filterList}</div>;
